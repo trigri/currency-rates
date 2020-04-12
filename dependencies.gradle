@@ -1,0 +1,93 @@
+ext {
+    //project
+    androidMinSdkVersion = 19
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 29
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+    androidBuildToolsVersion = "29.0.3"
+
+    //android
+    appCompatVersion = "1.1.0"
+    coreKtxVersion = "1.2.0"
+    constraintLayoutVersion = "1.1.3"
+    lifecycleVersion = "2.2.0"
+    recyclerViewVersion = "1.1.0"
+    circularImageViewVersion = "3.1.0"
+    //kotlin
+    kotlin_version = '1.3.61'
+    //dagger
+    dagger2Version = "2.27"
+    dagger2AndroidVersion = "2.27"
+    //rxjava
+    rxJavaVersion = "2.2.0"
+    rxKotlinVersion = "2.2.0"
+    rxAndroidVersion = "2.0.2"
+    //retrofit
+    retrofitVersion = "2.8.1"
+    rxRetrofitAdapterVersion = "2.8.1"
+    rmoshiRetrofitVersion = "2.4.0"
+    injectVersion = "1"
+    //moshi
+    moshiVersion = "1.9.2"
+    //glide
+    glideVersion = '4.11.0'
+    //okhttp
+    okhttpVersion = '4.5.0'
+
+    dataDependencies = [
+            implementation: [
+                    kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+                    dagger2               : "com.google.dagger:dagger:$dagger2Version",
+                    rxAndroid             : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+                    rxJava2               : "io.reactivex.rxjava2:rxjava:$rxAndroidVersion",
+                    inject                : "javax.inject:javax.inject:$injectVersion",
+                    moshi                 : "com.squareup.moshi:moshi:$moshiVersion",
+                    retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+                    rxRetrofitAdapter     : "com.squareup.retrofit2:adapter-rxjava2:$rxRetrofitAdapterVersion",
+                    moshiRetrofitConverter: "com.squareup.retrofit2:converter-moshi:$rmoshiRetrofitVersion",
+                    retrofitLogging       : "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+            ],
+            kaptDep       : [
+                    moshiCompiler  : "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion",
+                    dagger2Compiler: "com.google.dagger:dagger-compiler:$dagger2Version"
+            ]
+    ]
+
+    appDependencies = [
+            implementation: [
+                    kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+                    appCompat             : "androidx.appcompat:appcompat:$appCompatVersion",
+                    fragmentKtx           : 'androidx.fragment:fragment-ktx:1.1.0',
+                    coreKtx               : "androidx.core:core-ktx:$coreKtxVersion",
+                    recyclerView          : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
+                    constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+                    archExtention         : "android.arch.lifecycle:extensions:$lifecycleVersion",
+                    circularImageView     : "de.hdodenhof:circleimageview:$circularImageViewVersion",
+                    dagger2               : "com.google.dagger:dagger:$dagger2Version",
+                    glide                 : "com.github.bumptech.glide:glide:$glideVersion",
+                    dagger2Android        : "com.google.dagger:dagger-android:$dagger2AndroidVersion",
+                    dagger2AndroidSupport : "com.google.dagger:dagger-android-support:$dagger2AndroidVersion",
+                    rxAndroid             : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
+                    rxJava2               : "io.reactivex.rxjava2:rxjava:$rxAndroidVersion",
+                    inject                : "javax.inject:javax.inject:$injectVersion",
+                    moshi                 : "com.squareup.moshi:moshi:$moshiVersion",
+                    retrofit              : "com.squareup.retrofit2:retrofit:$retrofitVersion",
+                    rxRetrofitAdapter     : "com.squareup.retrofit2:adapter-rxjava2:$rxRetrofitAdapterVersion",
+                    moshiRetrofitConverter: "com.squareup.retrofit2:converter-moshi:$rmoshiRetrofitVersion",
+                    retrofitLogging       : "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+            ],
+            kaptDep       : [
+                    moshiCompiler         : "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion",
+                    dagger2Compiler       : "com.google.dagger:dagger-compiler:$dagger2Version",
+                    glideCompiler         : "com.github.bumptech.glide:compiler:$glideVersion",
+                    dagger2AndroidCompiler: "com.google.dagger:dagger-android-processor:$dagger2AndroidVersion"
+            ]
+    ]
+
+    dataDependenciesImplementation = dataDependencies["implementation"].values()
+    dataDependenciesKapt = dataDependencies["kaptDep"].values()
+
+    appDependenciesImplementation = appDependencies["implementation"].values()
+    appDependenciesKapt = appDependencies["kaptDep"].values()
+}

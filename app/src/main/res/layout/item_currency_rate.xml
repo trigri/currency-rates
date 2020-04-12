@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_flag"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/flag_eur" />
+
+    <TextView
+        android:id="@+id/tv_short_currency_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_currency_name"
+        app:layout_constraintStart_toEndOf="@+id/img_flag"
+        app:layout_constraintTop_toTopOf="@+id/img_flag"
+        tools:text="USD" />
+
+    <TextView
+        android:id="@+id/tv_currency_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_flag"
+        app:layout_constraintStart_toEndOf="@+id/img_flag"
+        tools:text="US Dollar" />
+
+    <EditText
+        android:id="@+id/et_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1118.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
