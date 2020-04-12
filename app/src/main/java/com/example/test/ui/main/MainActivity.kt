@@ -54,7 +54,6 @@ class MainActivity : BaseActivity() {
     private fun setListeners() {
         currencyAdapter.setListener(object : CurrencyRatesAdapter.Listener {
             override fun onAmountEntered(amount: Float) {
-                Log.e("doOnTextChanged", "amount setListeners  === $amount")
                 viewModel.onBaseAmountChanged(amount)
             }
 

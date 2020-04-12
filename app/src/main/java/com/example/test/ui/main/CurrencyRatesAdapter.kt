@@ -27,7 +27,6 @@ class CurrencyRatesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var listener: Listener? = null
 
     fun updateList(list: MutableList<CurrencyModel>?) {
-        Log.e("updateList", list.toString())
         val diffResult = DiffUtil.calculateDiff(MainDiffCallback(currencyRateList, list))
         diffResult.dispatchUpdatesTo(this)
         currencyRateList.clear()
