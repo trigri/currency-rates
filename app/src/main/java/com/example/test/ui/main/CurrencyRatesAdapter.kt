@@ -2,6 +2,7 @@ package com.example.test.ui.main
 
 import android.content.Context
 import android.text.InputFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View

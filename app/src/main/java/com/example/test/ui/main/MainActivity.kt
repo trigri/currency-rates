@@ -2,6 +2,8 @@ package com.example.test.ui.main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -32,7 +34,6 @@ class MainActivity : BaseActivity() {
         setListeners()
         observerViewModel()
         rc_currency_rates.adapter = currencyAdapter
-//        rc_currency_rates.itemAnimator = SlideUpItemAnimator()
     }
 
     override fun onResume() {
@@ -48,6 +49,8 @@ class MainActivity : BaseActivity() {
     private fun observerViewModel() {
         with(viewModel) {
             observeViewModel(currencyRates, ::onCurrencyRates)
+            observeViewModel(loading, ::onLoading)
+            observeViewModel(error, ::onError)
         }
     }
 
@@ -62,7 +65,7 @@ class MainActivity : BaseActivity() {
                 amount: Float,
                 list: List<CurrencyModel>
             ) {
-                viewModel.onBaseCurrencyChanged(baseCurrency, amount,list)
+                viewModel.onBaseCurrencyChanged(baseCurrency, amount, list)
             }
         })
     }
@@ -72,6 +75,26 @@ class MainActivity : BaseActivity() {
         currencyRateModel?.let {
             currencyAdapter.updateList(it)
         }
+    }
+
+    private fun onError(error: String?) {
+        Toast.makeText(this, error.orEmpty(), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onLoading(loading: Boolean?) {
+        if (loading == true) {
+            showProgressBar()
+        } else {
+            hideProgressBar()
+        }
+    }
+
+    private fun showProgressBar() {
+        progress_circular.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progress_circular?.visibility = View.GONE
     }
 
     private fun getViewModel() {

@@ -1,11 +1,6 @@
 package com.example.test.utils
 
-import android.app.Activity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import dagger.MapKey
 import javax.inject.Inject
 import javax.inject.Provider
