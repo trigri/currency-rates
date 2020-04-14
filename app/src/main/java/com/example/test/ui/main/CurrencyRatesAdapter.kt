@@ -2,7 +2,6 @@ package com.example.test.ui.main
 
 import android.content.Context
 import android.text.InputFilter
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -14,8 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.data.currency.model.CurrencyModel
 import com.example.test.R
+import com.example.test.utils.clearAndAddAll
+import com.example.test.utils.getFlagResource
+import com.example.test.utils.maxLength
+import com.example.test.utils.round
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.item_currency_rate.view.*
 import java.util.Currency.getInstance
+import java.util.concurrent.TimeUnit
 
 
 class CurrencyRatesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -25,14 +30,17 @@ class CurrencyRatesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var currencyRateList = mutableListOf<CurrencyModel>()
     private var listener: Listener? = null
+    private var useDiffUtil = true
 
-    fun updateList(list: MutableList<CurrencyModel>?) {
-        val diffResult = DiffUtil.calculateDiff(MainDiffCallback(currencyRateList, list))
-        diffResult.dispatchUpdatesTo(this)
-        currencyRateList.clear()
-        list?.let {
-            currencyRateList.addAll(it)
+    fun updateList(list: List<CurrencyModel>) {
+        if (useDiffUtil) {
+            val diffResult = DiffUtil.calculateDiff(MainDiffCallback(currencyRateList, list))
+            diffResult.dispatchUpdatesTo(this)
+        } else {
+            notifyItemRangeChanged(1, list.size - 1)
+            useDiffUtil = true
         }
+        currencyRateList.clearAndAddAll(list)
     }
 
     fun setListener(listener: Listener) {
@@ -97,9 +105,9 @@ class CurrencyRatesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     if (event.action == MotionEvent.ACTION_UP) {
                         currencyRateList.let {
                             val item = it.removeAt(adapterPosition)
-                            listener?.onBaseCurrencyChanged(item.currency, item.rate)
                             it.add(0, item)
                             notifyItemMoved(adapterPosition, 0)
+                            listener?.onBaseCurrencyChanged(item.currency, item.rate, it)
                         }
                     }
                     false
@@ -135,34 +143,27 @@ class CurrencyRatesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         private fun setListener() {
             itemView.et_rate.doOnTextChanged { text, _, _, _ ->
-                val amount = if (text.isNullOrEmpty()) {
-                    0f
-                } else {
-                    text.toString().toFloat()
-                }
-                listener?.onAmountEntered(amount)
+                Observable.just(text.toString())
+                    .debounce(200, TimeUnit.MILLISECONDS)
+                    .subscribe {
+                        val amount = if (text.isNullOrEmpty()) {
+                            useDiffUtil = false
+                            0f
+                        } else {
+                            text.toString().toFloat()
+                        }
+                        listener?.onAmountEntered(amount)
+                    }
             }
         }
     }
 
     interface Listener {
         fun onAmountEntered(amount: Float = 1f)
-        fun onBaseCurrencyChanged(baseCurrency: String?, amount: Float = 1f)
+        fun onBaseCurrencyChanged(
+            baseCurrency: String?,
+            amount: Float = 1f,
+            list: List<CurrencyModel>
+        )
     }
-}
-
-fun String?.getFlagResource(context: Context): Int {
-    val flag = "flag_${this?.toLowerCase()}"
-    return context.resources.getIdentifier(flag, "drawable", context.packageName)
-}
-
-
-fun Float?.round(decimals: Int = 2): String {
-    return this?.let {
-        "%.${decimals}f".format(this)
-    } ?: ""
-}
-
-fun EditText.maxLength(length: Int) {
-    filters = arrayOf(InputFilter.LengthFilter(length))
 }

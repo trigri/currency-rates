@@ -4,19 +4,19 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.data.currency.model.CurrencyModel
 
 class MainDiffCallback(
-    private val oldList: List<CurrencyModel>? = null,
-    private val newList: List<CurrencyModel>? = null
+    private val oldList: List<CurrencyModel>,
+    private val newList: List<CurrencyModel>
 ) : DiffUtil.Callback() {
 
-    override fun getOldListSize(): Int = oldList?.size ?: 0
-    override fun getNewListSize(): Int = newList?.size ?: 0
+    override fun getOldListSize(): Int = oldList.size
+    override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList?.get(oldItemPosition)?.currency == newList?.get(newItemPosition)?.currency
+        return oldList[oldItemPosition].currency == newList[newItemPosition].currency
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList?.get(oldItemPosition)?.rate == newList?.get(newItemPosition)?.rate
-                && oldList?.get(oldItemPosition)?.currency == newList?.get(newItemPosition)?.currency
+        return oldList[oldItemPosition].rate == newList[newItemPosition].rate
+                && oldList[oldItemPosition].currency == newList[newItemPosition].currency
     }
 }

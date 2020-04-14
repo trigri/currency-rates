@@ -57,8 +57,12 @@ class MainActivity : BaseActivity() {
                 viewModel.onBaseAmountChanged(amount)
             }
 
-            override fun onBaseCurrencyChanged(baseCurrency: String?, amount: Float) {
-                viewModel.onBaseCurrencyChanged(baseCurrency, amount)
+            override fun onBaseCurrencyChanged(
+                baseCurrency: String?,
+                amount: Float,
+                list: List<CurrencyModel>
+            ) {
+                viewModel.onBaseCurrencyChanged(baseCurrency, amount,list)
             }
         })
     }
