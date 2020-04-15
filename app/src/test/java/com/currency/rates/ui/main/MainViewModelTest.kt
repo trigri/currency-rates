@@ -6,7 +6,7 @@ import com.currency.data.currency.model.CurrencyRatesResponseModel
 import com.currency.data.currency.repository.CurrencyRepository
 import com.currency.data.currency.usecase.CurrencyRatesUseCase
 import com.currency.rates.ui.main.MainViewModel.CurrencyItem
-import com.currency.rates.utils.rx.TestSchedulerProvider
+import com.currency.data.rx.TestSchedulerProvider
 import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Observable
 import io.reactivex.schedulers.TestScheduler

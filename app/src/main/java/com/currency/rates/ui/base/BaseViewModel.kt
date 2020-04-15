@@ -2,7 +2,7 @@ package com.currency.rates.ui.base
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.currency.rates.utils.rx.SchedulerProvider
+import com.currency.data.rx.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import org.json.JSONObject

@@ -1,4 +1,4 @@
-package com.currency.rates.utils.rx
+package com.currency.data.rx
 
 import io.reactivex.Scheduler
 

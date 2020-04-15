@@ -1,8 +1,8 @@
 package com.currency.rates.di.module
 
 import com.currency.data.ApiClient
-import com.currency.rates.utils.rx.AppSchedulerProvider
-import com.currency.rates.utils.rx.SchedulerProvider
+import com.currency.data.rx.AppSchedulerProvider
+import com.currency.data.rx.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

@@ -6,7 +6,7 @@ import com.currency.data.currency.model.CurrencyRateModel
 import com.currency.data.currency.usecase.CurrencyRatesUseCase
 import com.currency.rates.ui.base.BaseViewModel
 import com.currency.rates.utils.clearAndAddAll
-import com.currency.rates.utils.rx.SchedulerProvider
+import com.currency.data.rx.SchedulerProvider
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
