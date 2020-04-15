@@ -32,12 +32,16 @@ open class BaseViewModel(val schedulerProvider: SchedulerProvider) : ViewModel()
         return when (throwable) {
             is HttpException -> {
                 val errorBody = throwable.response()?.errorBody()?.string()
-                val jsonError = JSONObject(errorBody.orEmpty())
-                Log.e("BaseViewModel", "errorBody ===>$errorBody")
-                if (jsonError.has("status_message")) {
-                    jsonError.getString("status_message")
+                Log.e(TAG, "errorBody ===>$errorBody")
+                if (errorBody?.startsWith("{") == true && errorBody.endsWith("}")) {
+                    val jsonError = JSONObject(errorBody.orEmpty())
+                    if (jsonError.has("status_message")) {
+                        jsonError.getString("status_message")
+                    } else {
+                        "Please try again."
+                    }
                 } else {
-                    "Please try again."
+                    errorBody.toString()
                 }
             }
             is SocketTimeoutException -> "Request timeout error."

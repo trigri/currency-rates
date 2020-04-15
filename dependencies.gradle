@@ -35,6 +35,10 @@ ext {
     //okhttp
     okhttpVersion = '4.5.0'
 
+    jUnitVersion = "4.12"
+    archTestVersion = "2.1.0"
+    mockitoKotlin = "1.5.0"
+
     dataDependencies = [
             implementation: [
                     kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -51,6 +55,11 @@ ext {
             kaptDep       : [
                     moshiCompiler  : "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion",
                     dagger2Compiler: "com.google.dagger:dagger-compiler:$dagger2Version"
+            ],
+            dataTest       : [
+                    JUnit        : "junit:junit:$jUnitVersion",
+                    archTest     : "androidx.arch.core:core-testing:$archTestVersion",
+                    mockitoKotlin: "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlin"
             ]
     ]
 
@@ -82,12 +91,19 @@ ext {
                     dagger2Compiler       : "com.google.dagger:dagger-compiler:$dagger2Version",
                     glideCompiler         : "com.github.bumptech.glide:compiler:$glideVersion",
                     dagger2AndroidCompiler: "com.google.dagger:dagger-android-processor:$dagger2AndroidVersion"
+            ],
+            appTest       : [
+                    JUnit        : "junit:junit:$jUnitVersion",
+                    archTest     : "androidx.arch.core:core-testing:$archTestVersion",
+                    mockitoKotlin: "com.nhaarman:mockito-kotlin-kt1.1:$mockitoKotlin"
             ]
     ]
 
     dataDependenciesImplementation = dataDependencies["implementation"].values()
     dataDependenciesKapt = dataDependencies["kaptDep"].values()
+    dataDependenciesTest = dataDependencies["dataTest"].values()
 
     appDependenciesImplementation = appDependencies["implementation"].values()
     appDependenciesKapt = appDependencies["kaptDep"].values()
+    appDependenciesTest = appDependencies["appTest"].values()
 }
