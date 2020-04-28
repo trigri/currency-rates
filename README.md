@@ -25,7 +25,7 @@ Convert response in a way to use in the presentation and show list of currency r
 
 ## Project Structure
 
-Project uses MVVM appoach. Dagger2 is used for dependency injection. Retrofit is used for networking along with RxJava for reactive programming and other libraries. It has two modules **app** and **data**.
+Project uses MVVM approach. Dagger2 is used for dependency injection. Retrofit is used for networking along with RxJava for reactive programming and other libraries. It has two modules **app** and **data**.
 
 ###### :app
 Handles all the presentaion logic it receieves data and draws on the views.
